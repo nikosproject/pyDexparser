@@ -1,14 +1,8 @@
 import struct
 import hashlib
 import zlib
-from StringItems import StringItems
-from TypeItems import TypeItems
-from ProtoItems import ProtoItems
-from FieldItems import FieldItems
-from MethodItems import MethodItems
-from ClassDefItems import ClassDefItems
-from collections import namedtuple
-from Clazz import Clazz
+from DataObject import *
+
 
 
 class Dex:
@@ -52,7 +46,7 @@ class Dex:
         data_off = struct.unpack('<L', self.mm[0x6C:0x70])[0]
 
         if len(self.mm) != file_size:
-            print "ERROR"
+            print("ERROR")
 
         self.dexHeader = self.DexHeader(magic, checksum, signature, file_size, header_size, endian_tag, link_size,
                                         link_off, map_off, string_ids_size, string_ids_off, type_ids_size, type_ids_off,
@@ -60,7 +54,7 @@ class Dex:
                                         method_ids_off, class_defs_size, class_defs_off, data_size, data_off)
 
     def print_dex_header(self):
-        print self.dexHeader
+        print(self.dexHeader)
 
     def parse_dex_parts(self):
         self.string_id_list()
